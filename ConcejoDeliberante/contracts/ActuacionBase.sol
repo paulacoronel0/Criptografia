@@ -4,39 +4,37 @@ pragma solidity >=0.8.2 <0.9.0;
 
 contract ActuacionBase {
 
-    enum Estado { Activa, Modificada, Anulada }
-
     struct Cambio {
         uint256 timestamp;
-        Estado estadoAnterior;
-        Estado estadoNuevo;
+        string estadoAnterior;
+        string estadoNuevo;
         address modificadoPor;
         string descripcion;
     }
 
     struct Actuacion {
-        bytes32 id;
-        uint256  fechaCreacion;   // timestamp Unix en segundos
-        uint256  dniAutor;
-        bytes32   nombreAutor;
-        Estado estado;          // estado actual (el último es el vigente)
-        bool     existe;          // bandera de existencia (patrón Solidity)
+        string id;
+        uint256 fechaCreacion;   // timestamp Unix en segundos
+        uint256 dniAutor;
+        string nombreAutor;
+        string  estado;          // string actual (el último es el vigente)
+        bool    existe;          // bandera de existencia (patrón Solidity)
         Cambio[] historial;       // trazabilidad de cambios
     }
 
-    // ESTADO
+    // string
 
     address public propietario;           // quien desplegó el contrato
     uint256 public constant COSTO = 500;  // wei requeridos para agregar
 
-    mapping(bytes32 => Actuacion) internal actuaciones;
-    bytes32[] internal ids;                // para poder enumerar, almacenas los ids
+    mapping(string => Actuacion) internal actuaciones;
+    string[] internal ids;                // para poder enumerar, almacenas los ids
 
     // EVENTOS:
     
-    event ActuacionAgregada(bytes32 indexed id, uint256 fechaCreacion, uint256 dniAutor, bytes32 nombreAutor);
-    event ActuacionModificada(bytes32 indexed id, string descripcion);
-    event ActuacionEliminada(bytes32 indexed id); 
+    event ActuacionAgregada(string indexed id, uint256 fechaCreacion, uint256 dniAutor, string nombreAutor, string estado);
+    event ActuacionModificada(string indexed id, string nuevoEstado, string descripcion);
+    event ActuacionEliminada(string indexed id, string nuevoEstado); 
 
     // MODIFICADORES:
 
@@ -58,9 +56,10 @@ contract ActuacionBase {
     // memory: hace que sea temporal en el metodo
 
     function _inicializarActuacion(
-        bytes32 _id,
+        string memory _id,
         uint256 _dniAutor, 
-        bytes32 _nombreAutor) public payable{
+        string memory _nombreAutor,
+        string memory estadoNuevo) public payable{
         
         require(!actuaciones[_id].existe, "La actuacion ya existe");
         require(msg.value >= 500, "No se ha pagado la tarifa de registro");
@@ -70,20 +69,22 @@ contract ActuacionBase {
         a.dniAutor = _dniAutor;
         a.nombreAutor = _nombreAutor;
         a.fechaCreacion = block.timestamp;
-        a.estado = Estado.Activa;
+        a.estado = estadoNuevo;
         propietario = msg.sender;
         a.historial.push(Cambio({   timestamp: block.timestamp,
-                                    estadoAnterior: Estado.Activa,
-                                    estadoNuevo: Estado.Activa,
+                                    estadoAnterior: estadoNuevo,
+                                    estadoNuevo: estadoNuevo,
                                     modificadoPor: msg.sender,
                                     descripcion: "Creacion inicial"
                                 }));
         ids.push(_id);
 
-        emit ActuacionAgregada(_id, a.fechaCreacion, a.dniAutor, a.nombreAutor);
+        emit ActuacionAgregada(_id, a.fechaCreacion, a.dniAutor, a.nombreAutor, a.estado);
     }
 
-    function consultarActuacion(bytes32 _id)
+    // VER ENTRADA: Retorne la entrada que el usuario indica
+
+    function _consultarActuacion(string memory _id)
         public
         view
         returns (Actuacion memory)
@@ -96,7 +97,7 @@ contract ActuacionBase {
         Esta operación solo debe estar disponible para el cliente y/o el responsable de inicializar el
         contrato. Si la entrada a modificar no existe, la operación debe ser rechazada.*/
 
-    function modificarEntrada(bytes32 _id, string memory _dato)
+    function _modificarEntrada(string memory _id, string memory _estadoNuevo, string memory _dato)
         public
         returns (bool success)
     {
@@ -104,18 +105,18 @@ contract ActuacionBase {
         require(msg.sender == propietario, "No es el propietario");
 
         Actuacion storage a = actuaciones[_id];
-        Estado anterior = a.estado;
-        a.estado = Estado.Modificada;
+        string memory anterior = a.estado;
+        a.estado = _estadoNuevo;
 
         a.historial.push(Cambio({
             timestamp: block.timestamp,
             estadoAnterior: anterior,
-            estadoNuevo: Estado.Modificada,
+            estadoNuevo: _estadoNuevo,
             modificadoPor: msg.sender,
             descripcion: _dato
         }));
 
-        emit ActuacionModificada(_id, _dato);
+        emit ActuacionModificada(_id, _estadoNuevo, _dato);
         return true;
     }
 
@@ -125,22 +126,22 @@ contract ActuacionBase {
     */
 
     
-    function _eliminarEntrada (bytes32 _id) internal {
+    function _eliminarActuacion (string memory _id, string memory _estadoNuevo) public {
         require(actuaciones[_id].existe, "La actuacion no existe");
         require(msg.sender == propietario, "No es el propietario");
         Actuacion storage a = actuaciones[_id];
-        Estado anterior = a.estado;
+        string memory anterior = a.estado;
         a.historial.push(Cambio({
             timestamp: block.timestamp,
             estadoAnterior: anterior,
-            estadoNuevo: Estado.Anulada,
+            estadoNuevo: _estadoNuevo,
             modificadoPor: msg.sender,
             descripcion: "Eliminacion"
         }));
 
-        a.estado = Estado.Anulada;
+        a.estado = _estadoNuevo;
 
-        emit ActuacionEliminada(_id);
+        emit ActuacionEliminada(_id, _estadoNuevo);
     }
 
 }

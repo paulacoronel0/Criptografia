@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -89,6 +84,56 @@
 					}
 				],
 				"name": "ActuacionModificada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "numOrdenanza",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "vigencia",
+						"type": "string"
+					}
+				],
+				"name": "OrdenanzaAgregada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "vigenciaNueva",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "dato",
+						"type": "string"
+					}
+				],
+				"name": "VigenciaActualizada",
 				"type": "event"
 			},
 			{
@@ -263,6 +308,130 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_numOrdenanza",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_nombreAutor",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_vigencia",
+						"type": "string"
+					}
+				],
+				"name": "agregarOrdenanza",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_id",
+						"type": "string"
+					}
+				],
+				"name": "consultarOrdenanza",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "nombreAutor",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "vigencia",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "numOrdenanza",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_id",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_vigencia",
+						"type": "string"
+					}
+				],
+				"name": "eliminar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_id",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_vigencia",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_dato",
+						"type": "string"
+					}
+				],
+				"name": "modificarVigencia",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "propietario",
 				"outputs": [
@@ -289,7 +458,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ConcejoDeliberante/contracts/ActuacionBase.sol": "ActuacionBase"
+			"ConcejoDeliberante/contracts/Ordenanza.sol": "Ordenanza"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -309,6 +478,14 @@
 			"urls": [
 				"bzz-raw://75037b39a64c810407ba545a89497641d0ae87c8a60ce244b5ce0b5f887a0ee1",
 				"dweb:/ipfs/Qmb6pqMuGoeWrUKBzsntP5br1Y9huZSQCiv2siU1jqLBwS"
+			]
+		},
+		"ConcejoDeliberante/contracts/Ordenanza.sol": {
+			"keccak256": "0xa9bd3ffb0ba7476c8ae297c90cbbb4f4dd1a9fa8995a286032233c9c98de719d",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://fb637fc57f30c70303522b9d5f4bd88c33c65fa1c8c8e7376dc251f5db5de07e",
+				"dweb:/ipfs/QmbzCnpDTYPqoD9yFRSEMbXUvEXbAg8dcJwhNaMuQwBRdE"
 			]
 		}
 	},
