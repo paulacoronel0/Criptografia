@@ -130,9 +130,17 @@ contract ActuacionBase {
         require(msg.sender == propietario, "No es el propietario");
         Actuacion storage a = actuaciones[_id];
         Estado anterior = a.estado;
-        a.estado = Estado.Eliminada;
+        a.historial.push(Cambio({
+            timestamp: block.timestamp,
+            estadoAnterior: anterior,
+            estadoNuevo: Estado.Anulada,
+            modificadoPor: msg.sender,
+            descripcion: "Eliminacion"
+        }));
 
-        emit ActuacionEliminada(id);
+        a.estado = Estado.Anulada;
+
+        emit ActuacionEliminada(_id);
     }
 
 }

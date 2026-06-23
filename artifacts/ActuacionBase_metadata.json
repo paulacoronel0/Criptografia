@@ -1,0 +1,270 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "id",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "dniAutor",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "nombreAutor",
+						"type": "bytes32"
+					}
+				],
+				"name": "ActuacionAgregada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "id",
+						"type": "bytes32"
+					}
+				],
+				"name": "ActuacionEliminada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "id",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "descripcion",
+						"type": "string"
+					}
+				],
+				"name": "ActuacionModificada",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "COSTO",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_id",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_nombreAutor",
+						"type": "bytes32"
+					}
+				],
+				"name": "_inicializarActuacion",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_id",
+						"type": "bytes32"
+					}
+				],
+				"name": "consultarActuacion",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "bytes32",
+								"name": "id",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "uint256",
+								"name": "fechaCreacion",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dniAutor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "nombreAutor",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "enum ActuacionBase.Estado",
+								"name": "estado",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bool",
+								"name": "existe",
+								"type": "bool"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "timestamp",
+										"type": "uint256"
+									},
+									{
+										"internalType": "enum ActuacionBase.Estado",
+										"name": "estadoAnterior",
+										"type": "uint8"
+									},
+									{
+										"internalType": "enum ActuacionBase.Estado",
+										"name": "estadoNuevo",
+										"type": "uint8"
+									},
+									{
+										"internalType": "address",
+										"name": "modificadoPor",
+										"type": "address"
+									},
+									{
+										"internalType": "string",
+										"name": "descripcion",
+										"type": "string"
+									}
+								],
+								"internalType": "struct ActuacionBase.Cambio[]",
+								"name": "historial",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct ActuacionBase.Actuacion",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_id",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "_dato",
+						"type": "string"
+					}
+				],
+				"name": "modificarEntrada",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "propietario",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ConcejoDeliberante/contracts/Actuacion.sol": "ActuacionBase"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ConcejoDeliberante/contracts/Actuacion.sol": {
+			"keccak256": "0x806b113768558a204e097386c4e8e43d914129fc49b3f7b2f770e89a571a5aa1",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://5267b5797aa8e6651fc0d0e208d0d3db628a8b1ac9635ca97fae05ba9ff76d07",
+				"dweb:/ipfs/QmYNxQYgvVfLZoGw8yektqy35RiuZxR5WnWxJzmUQ3uroy"
+			]
+		}
+	},
+	"version": 1
+}
