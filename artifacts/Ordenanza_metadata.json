@@ -9,10 +9,10 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "string",
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
@@ -28,15 +28,15 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "nombreAutor",
-						"type": "string"
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "estado",
-						"type": "string"
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
 					}
 				],
 				"name": "ActuacionAgregada",
@@ -46,16 +46,16 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "string",
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "nuevoEstado",
-						"type": "string"
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
 					}
 				],
 				"name": "ActuacionEliminada",
@@ -65,22 +65,22 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "string",
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "nuevoEstado",
-						"type": "string"
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "descripcion",
-						"type": "string"
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
 					}
 				],
 				"name": "ActuacionModificada",
@@ -91,9 +91,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
@@ -103,9 +103,15 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "vigencia",
-						"type": "string"
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
 					}
 				],
 				"name": "OrdenanzaAgregada",
@@ -116,21 +122,21 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "vigenciaNueva",
-						"type": "string"
+						"type": "uint8"
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "dato",
-						"type": "string"
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
 					}
 				],
 				"name": "VigenciaActualizada",
@@ -152,20 +158,15 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"name": "_consultarActuacion",
 				"outputs": [
 					{
 						"components": [
-							{
-								"internalType": "string",
-								"name": "id",
-								"type": "string"
-							},
 							{
 								"internalType": "uint256",
 								"name": "fechaCreacion",
@@ -175,16 +176,6 @@
 								"internalType": "uint256",
 								"name": "dniAutor",
 								"type": "uint256"
-							},
-							{
-								"internalType": "string",
-								"name": "nombreAutor",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "estado",
-								"type": "string"
 							},
 							{
 								"internalType": "bool",
@@ -199,24 +190,19 @@
 										"type": "uint256"
 									},
 									{
-										"internalType": "string",
-										"name": "estadoAnterior",
-										"type": "string"
+										"internalType": "uint8",
+										"name": "estado",
+										"type": "uint8"
 									},
 									{
-										"internalType": "string",
-										"name": "estadoNuevo",
-										"type": "string"
+										"internalType": "bytes32",
+										"name": "hash",
+										"type": "bytes32"
 									},
 									{
 										"internalType": "address",
 										"name": "modificadoPor",
 										"type": "address"
-									},
-									{
-										"internalType": "string",
-										"name": "descripcion",
-										"type": "string"
 									}
 								],
 								"internalType": "struct ActuacionBase.Cambio[]",
@@ -235,14 +221,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_estadoNuevo",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"name": "_eliminarActuacion",
@@ -253,9 +239,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
@@ -263,14 +249,19 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "_nombreAutor",
-						"type": "string"
+						"internalType": "uint8",
+						"name": "_estadoNuevo",
+						"type": "uint8"
 					},
 					{
-						"internalType": "string",
-						"name": "estadoNuevo",
-						"type": "string"
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fechaCreacion",
+						"type": "uint256"
 					}
 				],
 				"name": "_inicializarActuacion",
@@ -281,22 +272,22 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_estadoNuevo",
-						"type": "string"
+						"type": "uint8"
 					},
 					{
-						"internalType": "string",
-						"name": "_dato",
-						"type": "string"
+						"internalType": "bytes32",
+						"name": "_hashNuevo",
+						"type": "bytes32"
 					}
 				],
-				"name": "_modificarEntrada",
+				"name": "_modificarActuacion",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -310,13 +301,23 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
 						"name": "_dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fechaCreacion",
 						"type": "uint256"
 					},
 					{
@@ -325,14 +326,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "_nombreAutor",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_vigencia",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"name": "agregarOrdenanza",
@@ -343,18 +339,13 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"name": "consultarOrdenanza",
 				"outputs": [
-					{
-						"internalType": "string",
-						"name": "id",
-						"type": "string"
-					},
 					{
 						"internalType": "uint256",
 						"name": "fechaCreacion",
@@ -366,19 +357,19 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "nombreAutor",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "vigencia",
-						"type": "string"
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint256",
 						"name": "numOrdenanza",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
 					}
 				],
 				"stateMutability": "view",
@@ -387,14 +378,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_vigencia",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"name": "eliminar",
@@ -405,19 +396,19 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "_id",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_vigencia",
-						"type": "string"
+						"type": "uint8"
 					},
 					{
-						"internalType": "string",
-						"name": "_dato",
-						"type": "string"
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
 					}
 				],
 				"name": "modificarVigencia",
@@ -473,19 +464,19 @@
 	},
 	"sources": {
 		"ConcejoDeliberante/contracts/ActuacionBase.sol": {
-			"keccak256": "0xdb459ba275cd7a35d50d5c9b557556467f20077e2dc72e14f04739c52f8c922b",
+			"keccak256": "0x44b2e280806dcf2e0d6bbfbe2efd990b6ff74424c692e30a8d08634d26deda5f",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://75037b39a64c810407ba545a89497641d0ae87c8a60ce244b5ce0b5f887a0ee1",
-				"dweb:/ipfs/Qmb6pqMuGoeWrUKBzsntP5br1Y9huZSQCiv2siU1jqLBwS"
+				"bzz-raw://e36fb2439e303d0c546f6dab8d617d48b9361a1116b3d79c0d173db03b854593",
+				"dweb:/ipfs/QmStEL3ToFXhvPqEXqQ726qLDRS5T61cZpymq2iCdejK7m"
 			]
 		},
 		"ConcejoDeliberante/contracts/Ordenanza.sol": {
-			"keccak256": "0xa9bd3ffb0ba7476c8ae297c90cbbb4f4dd1a9fa8995a286032233c9c98de719d",
+			"keccak256": "0x2599f5506007797c20cc8bc04d8a2d4b3a5384b491c2bf2ee2149aaec6c1de6b",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://fb637fc57f30c70303522b9d5f4bd88c33c65fa1c8c8e7376dc251f5db5de07e",
-				"dweb:/ipfs/QmbzCnpDTYPqoD9yFRSEMbXUvEXbAg8dcJwhNaMuQwBRdE"
+				"bzz-raw://3778d81e5b40bfa163b7dafd1b00ad20617b57e9f43befb07436bd7404c79526",
+				"dweb:/ipfs/QmRtcqKTwV5XaAcMew4qQxoMwYPFndBJkYNuwmwkRgoEgc"
 			]
 		}
 	},

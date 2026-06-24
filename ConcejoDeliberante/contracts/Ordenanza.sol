@@ -12,12 +12,12 @@ contract Ordenanza is ActuacionBase{
 
     // ESTADO
 
-    mapping(string => DatosOrdenanza) internal datosExtra;
+    mapping(uint256 => DatosOrdenanza) internal datosExtra;
 
     // EVENTOS ESPECIFICOS:
     
-    event OrdenanzaAgregada(string id, uint256 numOrdenanza, string vigencia);
-    event VigenciaActualizada(string id, string vigenciaNueva, string dato);
+    event OrdenanzaAgregada(uint256 id, uint256 numOrdenanza, uint8 vigencia, bytes32 hash);
+    event VigenciaActualizada(uint256 id, uint8 vigenciaNueva, bytes32 hash);
 
     // FUNCIONES:
 
@@ -31,44 +31,41 @@ contract Ordenanza is ActuacionBase{
     // memory: hace que sea temporal en el metodo
 
     function agregarOrdenanza(  
-        string memory _id, 
+        uint256 _id,
         uint256 _dniAutor,
+        bytes32 _hash,
+        uint256 _fechaCreacion,
         uint256 _numOrdenanza, 
-        string memory _nombreAutor,
-        string memory _vigencia) public payable {
-            require(keccak256(bytes(_vigencia)) == keccak256(bytes("Vigente"))   ||
-                    keccak256(bytes(_vigencia)) == keccak256(bytes("Modificada")) ||
-                    keccak256(bytes(_vigencia)) == keccak256(bytes("Derogada")),
-                    "Vigencia invalida: use Vigente, Modificada o Derogada"
+        uint8   _vigencia) public payable {
+            require(keccak256(abi.encodePacked(_vigencia)) == keccak256(abi.encodePacked(uint8(0))),
+                "Vigencia invalida: use (0) para Vigente"
             );
-            _inicializarActuacion(_id, _dniAutor, _nombreAutor, _vigencia);
-            emit OrdenanzaAgregada(_id, _numOrdenanza, _vigencia);
+            _inicializarActuacion(_id, _dniAutor, _vigencia, _hash, _fechaCreacion);
+            emit OrdenanzaAgregada(_id, _numOrdenanza, _vigencia, _hash);
         }
 
     // VER ENTRADA: Retorne la entrada que el usuario indica
 
-    function consultarOrdenanza(string memory _id)
+    function consultarOrdenanza(uint256 _id)
         public
         view
         returns (
-            string   memory id,
             uint256  fechaCreacion,   // timestamp Unix en segundos
             uint256  dniAutor,
-            string   memory nombreAutor,
-            string   memory vigencia,
-            uint256  numOrdenanza
+            uint8   vigencia,
+            uint256  numOrdenanza,
+            bytes32 hash
     
         )
     {
         ActuacionBase.Actuacion memory actuacion = _consultarActuacion(_id);
         DatosOrdenanza storage o = datosExtra[_id];
         return (
-            actuacion.id,
             actuacion.fechaCreacion,
             actuacion.dniAutor,
-            actuacion.nombreAutor,
-            actuacion.estado,
-            o.numOrdenanza
+            actuacion.historial[actuacion.historial.length - 1].estado,
+            o.numOrdenanza,
+            actuacion.historial[actuacion.historial.length - 1].hash
         );
     }
     
@@ -77,18 +74,16 @@ contract Ordenanza is ActuacionBase{
         contrato. Si la entrada a modificar no existe, la operación debe ser rechazada.*/
 
     function modificarVigencia(
-        string memory _id, 
-        string memory _vigencia,
-        string memory _dato) 
+        uint256 _id, 
+        uint8 _vigencia,
+        bytes32 _hash) 
         public returns (bool success)
     {
-        require(keccak256(bytes(_vigencia)) == keccak256(bytes("Vigente"))   ||
-                keccak256(bytes(_vigencia)) == keccak256(bytes("Modificada")) ||
-                keccak256(bytes(_vigencia)) == keccak256(bytes("Derogada")),
-                "Vigencia invalida: use Vigente, Modificada o Derogada"
+        require(keccak256(abi.encodePacked(_vigencia)) == keccak256(abi.encodePacked(uint8(1))),
+            "Vigencia invalida: use (1) para Modificada "
         );
-        _modificarEntrada(_id, _vigencia, _dato);
-        emit VigenciaActualizada(_id, _vigencia, _dato);
+        _modificarActuacion(_id, _vigencia, _hash);
+        emit VigenciaActualizada(_id, _vigencia, _hash);
         return true;
     }
 
@@ -97,11 +92,11 @@ contract Ordenanza is ActuacionBase{
         contrato.
     */
 
-    function eliminar(string memory _id, string memory _vigencia) public {
-        require(keccak256(bytes(_vigencia)) == keccak256(bytes("Derogada")),
-                "Vigencia invalida: use Vigente, Modificada o Derogada"
-        );
+    function eliminar(uint256 _id, uint8 _vigencia) public {
+        require(
+                keccak256(abi.encodePacked(_vigencia)) == keccak256(abi.encodePacked(uint8(2))),
+                "Vigencia invalida: use (2) para Derogada"
+            );
         _eliminarActuacion(_id, _vigencia);
     }
-
 }
