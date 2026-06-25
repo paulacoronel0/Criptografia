@@ -1,0 +1,506 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "dniAutor",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ActuacionAgregada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
+					}
+				],
+				"name": "ActuacionEliminada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ActuacionModificada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "numDeclaracion",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "categoria",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "institucionBen",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "DeclaracionAgregada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "estadoNuevo",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "DeclaracionModificada",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "COSTO",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "_consultarActuacion",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "fechaCreacion",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dniAutor",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "existe",
+								"type": "bool"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "timestamp",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint8",
+										"name": "estado",
+										"type": "uint8"
+									},
+									{
+										"internalType": "bytes32",
+										"name": "hash",
+										"type": "bytes32"
+									},
+									{
+										"internalType": "address",
+										"name": "modificadoPor",
+										"type": "address"
+									}
+								],
+								"internalType": "struct ActuacionBase.Cambio[]",
+								"name": "historial",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct ActuacionBase.Actuacion",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_estadoNuevo",
+						"type": "uint8"
+					}
+				],
+				"name": "_eliminarActuacion",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_estadoNuevo",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fechaCreacion",
+						"type": "uint256"
+					}
+				],
+				"name": "_inicializarActuacion",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_estadoNuevo",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hashNuevo",
+						"type": "bytes32"
+					}
+				],
+				"name": "_modificarActuacion",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_categoria",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_institucionBen",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_estado",
+						"type": "uint8"
+					}
+				],
+				"name": "agregarDeclaracion",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "consultarDeclaracion",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "estado",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "categoria",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "institucionBen",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_estado",
+						"type": "uint8"
+					}
+				],
+				"name": "eliminarDeclaracion",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_estadoNuevo",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "modificarDeclaracion",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "propietario",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ConcejoDeliberante/contracts/Declaracion.sol": "Declaracion"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ConcejoDeliberante/contracts/ActuacionBase.sol": {
+			"keccak256": "0x44b2e280806dcf2e0d6bbfbe2efd990b6ff74424c692e30a8d08634d26deda5f",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://e36fb2439e303d0c546f6dab8d617d48b9361a1116b3d79c0d173db03b854593",
+				"dweb:/ipfs/QmStEL3ToFXhvPqEXqQ726qLDRS5T61cZpymq2iCdejK7m"
+			]
+		},
+		"ConcejoDeliberante/contracts/Declaracion.sol": {
+			"keccak256": "0x44f8f217c23611188f38b82d40006abd5689d1749947b5379e51f5a8f6666ed3",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://8645d125c8cdd91be1d18ff4c30f438e4e22f82df140b3777b45fac3457f7c43",
+				"dweb:/ipfs/QmSRFs2yP8Cv5FYMEVCmrXWHJY5RSVRvkXvrCKryukbrCK"
+			]
+		}
+	},
+	"version": 1
+}
