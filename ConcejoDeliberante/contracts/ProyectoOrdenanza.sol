@@ -37,7 +37,7 @@ contract ProyectoOrdenanza is ActuacionBase{
         uint256 _fechaCreacion,
         uint256 _numExpediente, 
         uint8   _resultado) public payable {
-            require(msg.value >= 500, "No se ha pagado la tarifa de registro");
+            require(msg.value >= COSTO, "No se ha pagado la tarifa de registro");
             require(keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(0))) ||
                 keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(1))) ||
                 keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(2))),

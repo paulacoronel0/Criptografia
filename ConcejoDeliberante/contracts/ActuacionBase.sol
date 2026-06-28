@@ -34,7 +34,7 @@ abstract contract ActuacionBase {
 
     // MODIFICADORES:
 
-    // CONSTRUSCTOR
+    // CONSTRUCTOR
 
     constructor() {
         propietario = msg.sender;
@@ -80,11 +80,11 @@ abstract contract ActuacionBase {
     // VER ENTRADA: Retorne la entrada que el usuario indica
 
     function _consultarActuacion(uint256 _id)
-        public view
+        internal view
         returns (Actuacion memory)
     {
         require(actuaciones[_id].existe, "La actuacion no existe");
-        return actuaciones[_id];  // ver si muestra bien los cambios
+        return actuaciones[_id];  
     }
     
     /*  MODIFICAR ENTRADA: Tome un identificador y un dato concreto y modifique una entrada existente.
@@ -126,6 +126,15 @@ abstract contract ActuacionBase {
         }));
 
         emit ActuacionEliminada(_id, _estadoNuevo);
+    }
+
+    function consultarHistorial(uint256 _id)
+    public
+    view
+    returns (Cambio[] memory)
+    {
+        Actuacion memory a = _consultarActuacion(_id);
+        return a.historial;
     }
 
 }

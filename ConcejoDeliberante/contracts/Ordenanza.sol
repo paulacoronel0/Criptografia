@@ -37,7 +37,7 @@ contract Ordenanza is ActuacionBase{
         uint256 _fechaCreacion,
         uint256 _numOrdenanza, 
         uint8   _vigencia) public payable {
-            require(msg.value >= 500, "No se ha pagado la tarifa de registro");
+            require(msg.value >= COSTO, "No se ha pagado la tarifa de registro");
             require(keccak256(abi.encodePacked(_vigencia)) == keccak256(abi.encodePacked(uint8(0))),
                 "Vigencia invalida: use (0) para Vigente"
             );
