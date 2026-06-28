@@ -87,6 +87,62 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "numExpediente",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "resultado",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "OrdenanzaAgregada",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "resultadoNueva",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ResultadoActualizado",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "COSTO",
 				"outputs": [
@@ -163,6 +219,130 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_numExpediente",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_resultado",
+						"type": "uint8"
+					}
+				],
+				"name": "agregarProyectoOrdenanza",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "consultarProyectoOrdenanza",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "fechaCreacion",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dniAutor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "resultado",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "numExpediente",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_resultado",
+						"type": "uint8"
+					}
+				],
+				"name": "eliminar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_resultado",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "modificarResultado",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "propietario",
 				"outputs": [
@@ -189,7 +369,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ConcejoDeliberante/contracts/ActuacionBase.sol": "ActuacionBase"
+			"ConcejoDeliberante/contracts/ProyectoOrdenanza.sol": "ProyectoOrdenanza"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -209,6 +389,14 @@
 			"urls": [
 				"bzz-raw://be4981368384979acf44619ba38b42206f4cc2ca8544caa4dcd0291419607e1f",
 				"dweb:/ipfs/QmX9v7GZb6Pa7BpkiHJVDfXHAFG9nxgzHCsd2XnRWb5CMk"
+			]
+		},
+		"ConcejoDeliberante/contracts/ProyectoOrdenanza.sol": {
+			"keccak256": "0x0b37fc47c16066238dce4ffb4d0e5f6f53ee2f240de0e2e64f85a2322718f59c",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://a3d26cd9d78f738f473ffed24db2971f2cbba26f68cc631a374ff15d7522c565",
+				"dweb:/ipfs/QmXQgnonSZkXg1SfspNWcdWrEknktidxzT7LgkA4aNKrAX"
 			]
 		}
 	},

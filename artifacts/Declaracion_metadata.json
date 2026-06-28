@@ -238,86 +238,6 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
-						"name": "_estadoNuevo",
-						"type": "uint8"
-					}
-				],
-				"name": "_eliminarActuacion",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_dniAutor",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_estadoNuevo",
-						"type": "uint8"
-					},
-					{
-						"internalType": "bytes32",
-						"name": "_hash",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_fechaCreacion",
-						"type": "uint256"
-					}
-				],
-				"name": "_inicializarActuacion",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_estadoNuevo",
-						"type": "uint8"
-					},
-					{
-						"internalType": "bytes32",
-						"name": "_hashNuevo",
-						"type": "bytes32"
-					}
-				],
-				"name": "_modificarActuacion",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "success",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
 						"internalType": "uint256",
 						"name": "_dniAutor",
 						"type": "uint256"
@@ -486,19 +406,19 @@
 	},
 	"sources": {
 		"ConcejoDeliberante/contracts/ActuacionBase.sol": {
-			"keccak256": "0x44b2e280806dcf2e0d6bbfbe2efd990b6ff74424c692e30a8d08634d26deda5f",
+			"keccak256": "0x9ac2e30c8eb3c36d44706e9a17924d1326ba35a1dabd554a99014594fe2afbf8",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://e36fb2439e303d0c546f6dab8d617d48b9361a1116b3d79c0d173db03b854593",
-				"dweb:/ipfs/QmStEL3ToFXhvPqEXqQ726qLDRS5T61cZpymq2iCdejK7m"
+				"bzz-raw://be4981368384979acf44619ba38b42206f4cc2ca8544caa4dcd0291419607e1f",
+				"dweb:/ipfs/QmX9v7GZb6Pa7BpkiHJVDfXHAFG9nxgzHCsd2XnRWb5CMk"
 			]
 		},
 		"ConcejoDeliberante/contracts/Declaracion.sol": {
-			"keccak256": "0x44f8f217c23611188f38b82d40006abd5689d1749947b5379e51f5a8f6666ed3",
+			"keccak256": "0x9aaed9867e61e6e61d37524c743ee3a85a37c7e600681fbfb85b650e5a3a0d6a",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://8645d125c8cdd91be1d18ff4c30f438e4e22f82df140b3777b45fac3457f7c43",
-				"dweb:/ipfs/QmSRFs2yP8Cv5FYMEVCmrXWHJY5RSVRvkXvrCKryukbrCK"
+				"bzz-raw://c2a60412b3f31896298a7535dc0dc6517753d3e6e6c93a02081cf9d562a10031",
+				"dweb:/ipfs/Qmcnu2KJWsUEcgrmRbvAzwAEUeLQaiQrnQJZG6TPDbsrXq"
 			]
 		}
 	},

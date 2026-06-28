@@ -49,6 +49,7 @@ contract Declaracion is ActuacionBase {
         bytes32 _institucionBen,
         uint8   _estado
     ) public payable {
+        require(msg.value >= 500, "No se ha pagado la tarifa de registro");
         require(_categoria <= 3, "Categoria invalida: 0=Cultural 1=Educativa 2=Deportiva 3=Social");
         require(_estado == 0, "Estado inicial invalido: use 0 para Vigente");
 

@@ -4,7 +4,7 @@ pragma solidity >=0.8.2 <0.9.0;
 
 import "./ActuacionBase.sol";
 
-contract ProyectoOrdenza is ActuacionBase{
+contract ProyectoOrdenanza is ActuacionBase{
 
     struct DatosProyectoOrdenanza {
         uint256  numExpediente;   // timestamp Unix en segundos
@@ -37,12 +37,14 @@ contract ProyectoOrdenza is ActuacionBase{
         uint256 _fechaCreacion,
         uint256 _numExpediente, 
         uint8   _resultado) public payable {
+            require(msg.value >= 500, "No se ha pagado la tarifa de registro");
             require(keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(0))) ||
                 keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(1))) ||
                 keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(2))),
                 "resultado invalida: use (0) para Aprobada, (1) para Archivada o (2) para Rechazada"
             );
             _inicializarActuacion(_id, _dniAutor, _resultado, _hash, _fechaCreacion);
+            datosExtra[_id].numExpediente = _numExpediente;
             emit OrdenanzaAgregada(_id, _numExpediente, _resultado, _hash);
         }
 

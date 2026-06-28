@@ -2,7 +2,7 @@
 
 pragma solidity >=0.8.2 <0.9.0;
 
-contract ActuacionBase {
+abstract contract ActuacionBase {
 
     struct Cambio {
         uint256 timestamp;
@@ -56,10 +56,9 @@ contract ActuacionBase {
         uint256 _dniAutor,
         uint8 _estadoNuevo,
         bytes32 _hash,
-        uint256 _fechaCreacion) public payable{
+        uint256 _fechaCreacion) internal {
         
         require(!actuaciones[_id].existe, "La actuacion ya existe");
-        require(msg.value >= 500, "No se ha pagado la tarifa de registro");
         
         Actuacion storage a = actuaciones[_id];
         a.existe        = true;
@@ -81,8 +80,7 @@ contract ActuacionBase {
     // VER ENTRADA: Retorne la entrada que el usuario indica
 
     function _consultarActuacion(uint256 _id)
-        public
-        view
+        public view
         returns (Actuacion memory)
     {
         require(actuaciones[_id].existe, "La actuacion no existe");
@@ -94,7 +92,7 @@ contract ActuacionBase {
         contrato. Si la entrada a modificar no existe, la operación debe ser rechazada.*/
 
     function _modificarActuacion(uint256 _id, uint8 _estadoNuevo, bytes32 _hashNuevo)
-        public
+        internal
         returns (bool success)
     {
         require(actuaciones[_id].existe, "La actuacion no existe");
@@ -117,7 +115,7 @@ contract ActuacionBase {
     */
 
     
-    function _eliminarActuacion (uint256 _id, uint8 _estadoNuevo) public {
+    function _eliminarActuacion (uint256 _id, uint8 _estadoNuevo) internal {
         require(actuaciones[_id].existe, "La actuacion no existe");
         require(msg.sender == propietario, "No es el propietario");
         actuaciones[_id].historial.push(Cambio({
