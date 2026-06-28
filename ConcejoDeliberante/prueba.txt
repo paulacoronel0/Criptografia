@@ -1,0 +1,185 @@
+///////////////////////////////////////////////////
+            Pruebas para ORDENANZA
+///////////////////////////////////////////////////
+
+-----------AGREGAR ORDENANZA------------
+
+1. Agregar ORDENANZA: Se debe enviar 500 wei
+
+    _id: 1
+    _dniAutor: 12345678
+    _hash: 0x0000000000000000000000000000000000000000000000000000000000000001
+    _fechaCreacion: 1700000000
+    _numOrdenanza: 100
+    _vigencia: 0
+
+
+2. Agregar sin pagar — debe revertir
+    
+    Mismos datos, Value = 0 wei.
+
+    Esperado: revert "No se ha pagado la tarifa de registro".
+
+3. Agregar con vigencia inválida — debe revertir
+    
+    Mismos datos, Value = 500 wei, _vigencia: 1.
+
+    Esperado: revert "Vigencia invalida: use (0) para Vigente".
+
+4. Agregar duplicado — debe revertir
+    
+    Repetí exactamente la prueba 1 (mismo _id, 500 wei).
+
+    Esperado: revert "La actuacion ya existe".
+
+-----------CONSULTAR ORDENANZA------------
+
+5. Consultar la ordenanza agregada
+
+    _id: 1
+
+    Esperado: devuelve fechaCreacion, dniAutor, vigencia=0, numOrdenanz_id: 1
+
+-----------MODIFICAR ORDENANZA------------
+
+6. Modificar vigencia — solo propietario puede
+
+    Desde la cuenta que desplegó el contrato, con _vigencia: 1 y cualquier hash nuevo.
+    
+    Esperado: éxito, evento VigenciaActualizada.
+
+7. Modificar desde otra cuenta — debe revertir
+
+    Cambiá la cuenta en Remix a la segunda disponible e intentá modificarVigencia.
+    
+    Esperado: revert "No es el propietario".
+
+8. Modificar con vigencia inválida
+
+    Propietario, _vigencia: 0 o 2.
+     
+    Esperado: revert "Vigencia invalida: use (1) para Modificada".
+
+-----------ELIMINAR ORDENANZA------------
+
+9. Eliminar con estado correcto
+
+    Propietario, _id: 1, _vigencia: 2.
+    
+    Esperado: éxito, evento ActuacionEliminada.
+
+10. Eliminar con estado incorrecto
+
+    _vigencia: 0 o 1.
+
+    Esperado: revert "Vigencia invalida: use (2) para Derogada".
+
+11. Historial de cambios (trazabilidad)
+
+    Después de agregar, modificar y eliminar el id 1, consultá con _consultarActuacion(1) (función del contrato base, visible en Remix). El array historial debería tener 3 entradas con timestamps distintos, hash.
+
+//////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////
+            Pruebas para DECLARACION
+///////////////////////////////////////////////////
+
+-----------AGREGAR DECLARACION------------
+
+12. Agregar — camino feliz
+
+    Value = 500 wei
+
+    _id: 10
+    _dniAutor: 99999999
+    _hash: 0x0000...0002
+    _fechaCreacion: 1700000001
+    _categoria: 2        (Deportiva)
+    _institucionBen: 0x436c75620000...  (bytes32 con texto "Club")
+    _estado: 0
+
+    Esperado: éxito, evento DeclaracionAgregada.
+
+13. Estado inicial distinto de 0 — debe revertir
+
+    _estado: 1 con 500 wei.
+    
+    Esperado: revert "Estado inicial invalido: use 0 para Vigente".
+
+14. Categoría fuera de rango — debe revertir
+
+    _categoria: 4 con 500 wei.
+    
+    Esperado: revert "Categoria invalida: 0=Cultural 1=Educativa 2=Deportiva 3=Social".
+
+
+-----------CONSULTAR DECLARACION------------
+
+
+15. Consultar — verificar datos extra
+
+    _id: 10
+
+    Esperado: estado=0, categoria=2, institucionBen correcto.
+
+
+-----------MODIFICAR DECLARACION------------
+
+16. Modificar estado — solo acepta estado 1
+
+    Propietario, _estadoNuevo: 1, hash nuevo.
+    
+    Esperado: éxito.
+
+17. Modificar con estado distinto de 1 — debe revertir
+
+    _estadoNuevo: 0 o 2.
+    
+    Esperado: revert "Estado invalido: use 1 para Modificada".
+
+-----------ELIMINAR DECLARACION------------
+
+18. Eliminar — solo acepta estado 2
+
+    _estado: 2.
+    
+    Esperado: éxito.
+
+19. Eliminar con estado incorrecto
+
+    _estado: 1.
+    
+    Esperado: revert "Estado invalido: use 2 para Derogada".
+
+//////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////
+            Pruebas para PROYECTO ORDENENZA
+///////////////////////////////////////////////////
+
+-----------AGREGAR PROYECTO ORDENANZA------------
+
+20. Agregar — camino feliz
+    
+    Value = 500 wei, _resultado: 0 (Aprobada).
+
+    Esperado: éxito, eventos ActuacionAgregada y ProyectoOrdenanzaAgregada.
+
+
+21. Resultado inválido (fuera de 0, 1, 2) — debe revertir
+    
+    _resultado: 3.
+
+    Esperado: revert "resultado invalida: use (0)...".
+
+-----------MODIFICAR PROYECTO ORDENANZA------------
+
+22. Modificar a cualquier valor válido (0, 1 o 2)
+        
+    A diferencia de Ordenanza, acá los tres valores son válidos al modificar.
+    
+    Esperado: éxito con _resultado: 1 o 2.
