@@ -44,7 +44,7 @@
 
 6. Modificar vigencia — solo propietario puede
 
-    Desde la cuenta que desplegó el contrato, con _vigencia: 1 y cualquier hash nuevo.
+    Desde la cuenta que desplegó el contrato, con _vigencia: 1 y cualquier hash nuevo: 0x0000000000000000000000000000000000000000000000000000000000000002.
     
     Esperado: éxito, evento VigenciaActualizada.
 
@@ -62,17 +62,18 @@
 
 -----------ELIMINAR ORDENANZA------------
 
-9. Eliminar con estado correcto
+9. Eliminar con estado incorrecto
+
+    _vigencia: 0 o 1.
+
+    Esperado: revert "Vigencia invalida: use (2) para Derogada".
+
+10. Eliminar con estado correcto
 
     Propietario, _id: 1, _vigencia: 2.
     
     Esperado: éxito, evento ActuacionEliminada.
 
-10. Eliminar con estado incorrecto
-
-    _vigencia: 0 o 1.
-
-    Esperado: revert "Vigencia invalida: use (2) para Derogada".
 
 11. Historial de cambios (trazabilidad)
 

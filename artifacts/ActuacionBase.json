@@ -38,7 +38,7 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"COSTO()": "52b5241e",
-			"_consultarActuacion(uint256)": "8e8a5876",
+			"consultarHistorial(uint256)": "1bc7509e",
 			"propietario()": "3c4f81cd"
 		}
 	},
@@ -145,56 +145,34 @@
 					"type": "uint256"
 				}
 			],
-			"name": "_consultarActuacion",
+			"name": "consultarHistorial",
 			"outputs": [
 				{
 					"components": [
 						{
 							"internalType": "uint256",
-							"name": "fechaCreacion",
+							"name": "timestamp",
 							"type": "uint256"
 						},
 						{
-							"internalType": "uint256",
-							"name": "dniAutor",
-							"type": "uint256"
+							"internalType": "uint8",
+							"name": "estado",
+							"type": "uint8"
 						},
 						{
-							"internalType": "bool",
-							"name": "existe",
-							"type": "bool"
+							"internalType": "bytes32",
+							"name": "hash",
+							"type": "bytes32"
 						},
 						{
-							"components": [
-								{
-									"internalType": "uint256",
-									"name": "timestamp",
-									"type": "uint256"
-								},
-								{
-									"internalType": "uint8",
-									"name": "estado",
-									"type": "uint8"
-								},
-								{
-									"internalType": "bytes32",
-									"name": "hash",
-									"type": "bytes32"
-								},
-								{
-									"internalType": "address",
-									"name": "modificadoPor",
-									"type": "address"
-								}
-							],
-							"internalType": "struct ActuacionBase.Cambio[]",
-							"name": "historial",
-							"type": "tuple[]"
+							"internalType": "address",
+							"name": "modificadoPor",
+							"type": "address"
 						}
 					],
-					"internalType": "struct ActuacionBase.Actuacion",
+					"internalType": "struct ActuacionBase.Cambio[]",
 					"name": "",
-					"type": "tuple"
+					"type": "tuple[]"
 				}
 			],
 			"stateMutability": "view",

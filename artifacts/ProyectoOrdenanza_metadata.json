@@ -161,69 +161,6 @@
 						"internalType": "uint256",
 						"name": "_id",
 						"type": "uint256"
-					}
-				],
-				"name": "_consultarActuacion",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "fechaCreacion",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "dniAutor",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "existe",
-								"type": "bool"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "timestamp",
-										"type": "uint256"
-									},
-									{
-										"internalType": "uint8",
-										"name": "estado",
-										"type": "uint8"
-									},
-									{
-										"internalType": "bytes32",
-										"name": "hash",
-										"type": "bytes32"
-									},
-									{
-										"internalType": "address",
-										"name": "modificadoPor",
-										"type": "address"
-									}
-								],
-								"internalType": "struct ActuacionBase.Cambio[]",
-								"name": "historial",
-								"type": "tuple[]"
-							}
-						],
-						"internalType": "struct ActuacionBase.Actuacion",
-						"name": "",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
@@ -254,6 +191,47 @@
 				"name": "agregarProyectoOrdenanza",
 				"outputs": [],
 				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "consultarHistorial",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint8",
+								"name": "estado",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "hash",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "address",
+								"name": "modificadoPor",
+								"type": "address"
+							}
+						],
+						"internalType": "struct ActuacionBase.Cambio[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -384,19 +362,19 @@
 	},
 	"sources": {
 		"ConcejoDeliberante/contracts/ActuacionBase.sol": {
-			"keccak256": "0x9ac2e30c8eb3c36d44706e9a17924d1326ba35a1dabd554a99014594fe2afbf8",
+			"keccak256": "0x511effedca4bbba0086fc70156169b6840fcf24c4b8cd16ca4e5e5b7832edb33",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://be4981368384979acf44619ba38b42206f4cc2ca8544caa4dcd0291419607e1f",
-				"dweb:/ipfs/QmX9v7GZb6Pa7BpkiHJVDfXHAFG9nxgzHCsd2XnRWb5CMk"
+				"bzz-raw://77d4fd36642489dd5607cca2b431db4a30cdaf6599002d75ec1e197a56cf87a1",
+				"dweb:/ipfs/QmSEoPk3HXFnE3K4b9rUr8MfbVq7pkd2Z4v9HfErWTeEsr"
 			]
 		},
 		"ConcejoDeliberante/contracts/ProyectoOrdenanza.sol": {
-			"keccak256": "0x0b37fc47c16066238dce4ffb4d0e5f6f53ee2f240de0e2e64f85a2322718f59c",
+			"keccak256": "0x45e6a7456108c6acd18e8e7f5a982a5237593c66c8254c4d575bd75f53275953",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://a3d26cd9d78f738f473ffed24db2971f2cbba26f68cc631a374ff15d7522c565",
-				"dweb:/ipfs/QmXQgnonSZkXg1SfspNWcdWrEknktidxzT7LgkA4aNKrAX"
+				"bzz-raw://c9373a18ba7b2e985c805acae6fb2e4c947dd2fa70011aa514d82aac37495e19",
+				"dweb:/ipfs/QmfQNowwyWws6xhYxTVp6jg534sFGXAKxuTs3K3GHj7QWi"
 			]
 		}
 	},

@@ -38,9 +38,7 @@ contract ProyectoOrdenanza is ActuacionBase{
         uint256 _numExpediente, 
         uint8   _resultado) public payable {
             require(msg.value >= COSTO, "No se ha pagado la tarifa de registro");
-            require(keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(0))) ||
-                keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(1))) ||
-                keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(2))),
+            require(_resultado == 0 || _resultado == 1 || _resultado == 2,
                 "resultado invalida: use (0) para Aprobada, (1) para Archivada o (2) para Rechazada"
             );
             _inicializarActuacion(_id, _dniAutor, _resultado, _hash, _fechaCreacion);
@@ -83,9 +81,7 @@ contract ProyectoOrdenanza is ActuacionBase{
         bytes32 _hash) 
         public returns (bool success)
     {
-        require(keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(0))) ||
-                keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(1))) ||
-                keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(2))),
+        require(_resultado == 0 || _resultado == 1 || _resultado == 2,
             "resultado invalida: use (0) para Aprobada, (1) para Archivada o (2) para Rechazada"
         );
         _modificarActuacion(_id, _resultado, _hash);
@@ -99,9 +95,7 @@ contract ProyectoOrdenanza is ActuacionBase{
     */
 
     function eliminar(uint256 _id, uint8 _resultado) public {
-        require(keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(0))) ||
-                keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(1))) ||
-                keccak256(abi.encodePacked(_resultado)) == keccak256(abi.encodePacked(uint8(2))),
+        require(_resultado == 0 || _resultado == 1 || _resultado == 2,
             "resultado invalida: use (0) para Aprobada, (1) para Archivada o (2) para Rechazada"
         );
         _eliminarActuacion(_id, _resultado);
